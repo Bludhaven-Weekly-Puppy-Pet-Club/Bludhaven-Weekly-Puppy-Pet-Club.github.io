@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "stickers": [
+    {
+      "id": "st_gbxbz7",
+      "src": "/stickers/img/uoqrggnv.png",
+      "x": 0.8765,
+      "y": 0.1434,
+      "w": 0.0906,
+      "rotate": 0,
+      "z": 1
+    },
+    {
+      "id": "st_1a68u0",
+      "src": "/stickers/img/fclgkvps.png",
+      "x": 0.8395,
+      "y": 0.2742,
+      "w": 0.0962,
+      "rotate": 0,
+      "z": 2
+    }
+  ]
+}
