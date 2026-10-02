@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="가상의 미국에 거주하는 강아지들을 쓰다듬는 주간 모임"><meta name="robots" content="noindex"><title>관리 | Bludhaven Weekly Puppy-Pet Club</title><style>/*
+ * 모바일 레이아웃. 이 파일 전체가 아래 @media 안에 들어간다.
+ * 브레이크포인트 값은 src/config/site.ts의 MOBILE_BREAKPOINT에서 빌드 시 채워진다(BaseLayout 참고).
+ * global.css·prose.css는 base 레이어에 있고, 이 파일은 그보다 뒤인 mobile 레이어라서 항상 우선한다.
+ */
+@layer base, mobile;
+
+@layer mobile {
+  @media (max-width: 768px) {
+    .pad {
+      --margin-width: var(--margin-width-mobile);
+      grid-template-columns: minmax(0, 1fr);
+      padding-left: var(--margin-width);
+    }
+
+    .pad-content {
+      padding-left: var(--space-2);
+      padding-right: var(--space-2);
+    }
+
+    /* 좌측 여백 메뉴 → 왼쪽에서 밀려 나오는 드로어 */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      align-self: normal;
+      z-index: 30;
+      width: min(var(--drawer-width), 85vw);
+      max-height: none;
+      background-color: var(--color-paper);
+      background-image: linear-gradient(
+        to bottom,
+        transparent calc(var(--line-height-rule) - 1px),
+        var(--color-rule) calc(var(--line-height-rule) - 1px)
+      );
+      background-size: 100% var(--line-height-rule);
+      background-position: 0 var(--rule-offset);
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      visibility: hidden;
+    }
+
+    .side-menu.is-open,
+    .side-menu.is-dragging {
+      visibility: visible;
+    }
+
+    .side-menu.is-open {
+      transform: translateX(0);
+    }
+
+    .side-menu.is-dragging {
+      transition: none;
+    }
+
+    .drawer-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: var(--color-backdrop);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-backdrop.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-backdrop.is-dragging {
+      transition: none;
+    }
+
+    /* 드로어가 열린 동안 배경 스크롤 잠금 */
+    html.drawer-locked,
+    html.drawer-locked body {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    /* 에디터 미리보기: 화면 전체, 안쪽 여백은 모바일 글 화면과 같게 */
+    .pe-preview {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+    }
+
+    .pe-preview-page {
+      padding-left: calc(var(--margin-width-mobile) + var(--space-2));
+      padding-right: var(--space-2);
+    }
+
+    /* 글목록 작성자: 좁은 화면에서는 닉네임만 */
+    .post-list .author-avatar {
+      display: none;
+    }
+
+    .member-header-avatar {
+      width: calc(var(--line-height-rule) * 2);
+      height: calc(var(--line-height-rule) * 2);
+    }
+
+    /* 스티커: 모바일에서는 레이어와 스티커 모드를 모두 숨긴다. */
+    .sticker-layer,
+    .sticker-toolbar,
+    .sticker-mode-button {
+      display: none !important;
+    }
+  }
+}
+</style><script>
+      // 이탈 경고(src/lib/admin/leave-guard.ts)가 뒤로·앞으로 가기를 ClientRouter보다 먼저 받도록, 라우터보다 앞서 popstate 감시를 건다.
+      if (!window.__leaveGuardHooked) {
+        window.__leaveGuardHooked = true;
+        addEventListener('popstate', (e) => {
+          if (window.__leaveGuardPopstate?.(e) === false) e.stopImmediatePropagation();
+        });
+      }
+    </script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CYDbzu1r.js"></script><link rel="stylesheet" href="/_astro/BaseLayout.BiOzg88_.css"></head><body><div class="pad"><nav id="side-menu" class="side-menu" aria-label="메뉴"><a class="site-title" href="/">Bludhaven Weekly Puppy-Pet Club</a><ul class="member-menu" aria-label="멤버"><li><a href="/member/m_lqkepa/" data-member-card="m_lqkepa"><span class="member-menu-photo"><img src="/members/default.svg" alt="" width="40" height="40"><span class="member-menu-me" hidden>나</span></span><span class="member-menu-name">꼬리</span></a></li></ul><ul><li><a href="/category/sql/">SQL</a></li><li><a href="/category/python/">Python</a></li><li><a href="/category/adsp/">ADsP</a></li><li><a href="/category/private/">Private</a></li></ul><form class="menu-search" action="/search/" method="get" role="search"><label class="visually-hidden" for="menu-search-input">블로그 검색</label><input id="menu-search-input" type="search" name="q" placeholder="검색" autocomplete="off"></form></nav><div id="drawer-backdrop" class="drawer-backdrop"></div><script type="module" src="/_astro/SideMenu.astro_astro_type_script_index_0_lang.B1CWGm-Z.js"></script><main class="pad-content"><header class="page-header"><h1 class="page-title">관리</h1></header><form class="admin-form" id="admin-login" hidden><p>GitHub 토큰을 입력하세요. 발급 방법은 README의 "관리자 토큰" 항목에 있습니다.</p><div class="admin-row"><label class="visually-hidden" for="admin-token">GitHub 토큰</label><input id="admin-token" type="password" name="token" autocomplete="off" spellcheck="false" required><button class="admin-button" type="submit">확인</button></div><label class="admin-check"><input type="checkbox" name="remember" checked>이 기기에서 기억 (해제하면 이 탭을 닫을 때까지만 유지)</label><p class="admin-status" id="admin-login-status" role="status" aria-live="polite"></p></form><section class="admin-form" id="admin-not-member" hidden><p class="admin-status" id="admin-not-member-text" role="status" aria-live="polite"></p><p class="admin-status" id="member-register-load" role="status" aria-live="polite" hidden></p><form id="member-register" hidden><h2 class="admin-heading">멤버로 등록하기</h2><div class="member-fields" data-member-fields><div class="member-photo"><img class="member-avatar is-large" src="/members/default.svg" alt="프로필 사진 미리보기" width="64" height="64" data-mf-preview><div><label class="admin-button sticker-upload">사진 고르기<input type="file" accept="image/png,image/jpeg,image/gif,image/webp" data-mf-file></label><button class="admin-text-button is-danger" type="button" data-mf-remove hidden>사진 지우기</button><p class="admin-meta">png·jpg·gif·webp, 10MB 이하. 가운데를 정사각형으로 잘라 저장합니다(움직이는 gif는 첫 장면만).</p></div></div><label class="admin-field"><span>닉네임</span><input type="text" autocomplete="off" maxlength="24" required data-mf-nickname></label><p class="admin-meta">1~12자, 다른 멤버와 겹치지 않게.</p><label class="admin-field"><span>디스코드 ID (선택)</span><input type="text" inputmode="numeric" autocomplete="off" spellcheck="false" data-mf-discord></label><p class="admin-meta">새 글 알림에서 멘션할 때 씁니다. 디스코드 설정 → 고급 → 개발자 모드 켜기 → 내 프로필 우클릭 → 사용자 ID 복사. 숫자만 입력합니다.</p></div><div class="pe-actions"><button class="admin-button" type="submit">등록</button></div><p class="admin-status" id="member-register-status" role="status" aria-live="polite"></p></form><button class="admin-button" type="button" data-admin-logout>이 기기에서 토큰 삭제</button></section><section id="admin-dashboard" data-member-only hidden><p class="admin-meta" id="admin-me"></p><p class="admin-meta">저장소 Bludhaven-Weekly-Puppy-Pet-Club/blog-source · 브랜치 main</p><ul class="admin-links"><li><a href="/admin/editor/">새 글 쓰기</a></li><li><a href="/admin/members/">멤버 관리</a></li><li data-site-admin-only hidden><a href="/admin/categories/">카테고리 관리</a></li></ul><p class="admin-status" id="admin-deploy" role="status" aria-live="polite">최근 배포 상태를 확인하는 중…</p><p class="admin-status" id="admin-notes" hidden></p><h2 class="admin-heading">임시저장</h2><p class="admin-status" id="admin-drafts-status" role="status" aria-live="polite">불러오는 중…</p><ul class="admin-list" id="admin-drafts"></ul><h2 class="admin-heading">글 목록</h2><div class="admin-row"><label class="admin-field"><span>카테고리</span><select id="admin-post-filter"><option value="">전체</option></select></label><label class="admin-field"><span>작성자</span><select id="admin-post-author"><option value="">전체</option></select></label></div><p class="admin-status" id="admin-posts-status" role="status" aria-live="polite">불러오는 중…</p><ul class="admin-list" id="admin-posts"></ul><section data-site-admin-only hidden><h2 class="admin-heading">공통 비밀번호 변경</h2><p class="admin-meta">잠금 카테고리의 공통 비밀번호는 이 화면에서 바꾸지 않습니다. 아래 순서로 바꿉니다.</p><ol class="admin-steps"><li>GitHub 저장소 Bludhaven-Weekly-Puppy-Pet-Club/blog-source의 Settings → Secrets and variables → Actions로 갑니다.</li><li>Repository secrets의 <code>PRIVATE_PASSWORD</code>를 새 비밀번호로 수정합니다.</li><li>Actions 탭에서 배포 워크플로를 다시 실행합니다(Run workflow). 배포가 끝나면 새 비밀번호가 적용됩니다.</li></ol><p class="admin-meta">비밀번호를 바꾸면 멤버들에게 새 비밀번호를 직접 알려 주세요. 이미 잠금을 푼 기기도 새 비밀번호를 다시 입력해야 합니다.</p></section><button class="admin-button" type="button" data-admin-logout>이 기기에서 토큰 삭제</button></section></main></div></body></html><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.DT_bM4pp.js"></script><script type="module" src="/_astro/index.astro_astro_type_script_index_0_lang.DO3gheBp.js"></script><script type="module" src="/_astro/index.astro_astro_type_script_index_1_lang.C48wYb_h.js"></script>

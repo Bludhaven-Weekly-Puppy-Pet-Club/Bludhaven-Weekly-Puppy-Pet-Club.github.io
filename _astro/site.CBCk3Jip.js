@@ -1,0 +1,1 @@
+var e=`Bludhaven-Weekly-Puppy-Pet-Club`;`${e.toLowerCase()}`;var t=10485760,n={owner:e,repo:`blog-source`,branch:`main`},r=`https://api.github.com`,i=`deploy.yml`,a=1e4,o=6e5;`${e}`;var s=`Asia/Seoul`,c=`+09:00`,l=`/admin/editor/`,u=10485760,d=3e4,f=5242880,p=.15;export{d as a,u as c,f as d,s as f,i,n as l,a as n,l as o,c as p,o as r,r as s,t,p as u};
